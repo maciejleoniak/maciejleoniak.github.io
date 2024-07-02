@@ -1,13 +1,40 @@
+:root {
+    --background-color: #f4f4f4;
+    --text-color: #000;
+    --header-background: #333;
+    --header-text-color: #fff;
+    --nav-link-color: #fff;
+    --section-background: #fff;
+    --footer-background: #333;
+    --footer-text-color: #fff;
+    --button-background: #333;
+    --button-hover-background: #555;
+}
+
+body.dark-mode {
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --header-background: #1e1e1e;
+    --header-text-color: #e0e0e0;
+    --nav-link-color: #e0e0e0;
+    --section-background: #2c2c2c;
+    --footer-background: #1e1e1e;
+    --footer-text-color: #e0e0e0;
+    --button-background: #3a3a3a;
+    --button-hover-background: #555;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--header-background);
+    color: var(--header-text-color);
     padding: 1rem 0;
     position: fixed;
     width: 100%;
@@ -28,7 +55,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: var(--nav-link-color);
     text-decoration: none;
     font-size: 1.2rem;
 }
@@ -36,17 +63,7 @@ nav ul li a {
 section {
     padding: 2rem;
     margin-top: 4rem;
-}
-
-section#home {
-    background-color: #eee;
-    text-align: center;
-    padding: 4rem 2rem;
-}
-
-section#about, section#projects, section#contact {
-    background-color: #fff;
-    margin: 2rem 0;
+    background-color: var(--section-background);
 }
 
 .project {
@@ -73,18 +90,18 @@ form button {
     padding: 0.7rem;
     border: none;
     border-radius: 4px;
-    background-color: #333;
-    color: #fff;
+    background-color: var(--button-background);
+    color: var(--header-text-color);
     cursor: pointer;
 }
 
 form button:hover {
-    background-color: #555;
+    background-color: var(--button-hover-background);
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--footer-background);
+    color: var(--footer-text-color);
     text-align: center;
     padding: 1rem 0;
     position: fixed;
