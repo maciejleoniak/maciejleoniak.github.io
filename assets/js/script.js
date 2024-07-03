@@ -1,4 +1,3 @@
-// JavaScript for interactivity
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize interactivity
