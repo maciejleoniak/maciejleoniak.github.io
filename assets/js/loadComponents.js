@@ -23,8 +23,8 @@ function checkAllComponentsLoaded() {
 
 // Load the header and footer
 document.addEventListener('DOMContentLoaded', () => {
-    loadHTMLComponent('header-component', 'components/header.html', setDarkModeToggleListener);
-    loadHTMLComponent('footer-component', 'components/footer.html');
+    loadHTMLComponent('header-component', 'pages/components/header.html', setDarkModeToggleListener);
+    loadHTMLComponent('footer-component', 'pages/components/footer.html');
 });
 
 // Set the dark mode toggle event listener
