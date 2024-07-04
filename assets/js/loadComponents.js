@@ -10,6 +10,17 @@ function loadHTMLComponent(selector, url, callback) {
         .catch(error => console.error('Error loading component:', error));
 }
 
+// Load and inject the head content
+function loadHeadContent(url, callback) {
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            document.head.innerHTML += data;
+            if (callback) callback();
+        })
+        .catch(error => console.error('Error loading head content:', error));
+}
+
 // Check if all components are loaded
 function checkAllComponentsLoaded() {
     const headerLoaded = document.querySelector('header-component').innerHTML.trim() !== '';
@@ -21,10 +32,12 @@ function checkAllComponentsLoaded() {
     }
 }
 
-// Load the header and footer
+// Load the head, header, and footer
 document.addEventListener('DOMContentLoaded', () => {
-    loadHTMLComponent('header-component', 'pages/components/header.html', setDarkModeToggleListener);
-    loadHTMLComponent('footer-component', 'pages/components/footer.html');
+    loadHeadContent('components/head.html', () => {
+        loadHTMLComponent('header-component', 'components/header.html', setDarkModeToggleListener);
+        loadHTMLComponent('footer-component', 'components/footer.html');
+    });
 });
 
 // Set the dark mode toggle event listener
