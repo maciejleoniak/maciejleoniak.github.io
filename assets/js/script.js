@@ -50,3 +50,48 @@ function initializeDarkMode() {
         document.body.classList.add('dark-mode');
     }
 }
+
+// slider 
+
+document.addEventListener("DOMContentLoaded", function() {
+    const carouselContainer = document.querySelector('.carousel-container');
+    const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+
+    let slideIndex = 0;
+    const slideInterval = 6000; // Interval between slides in milliseconds
+
+    function nextSlide() {
+        slideIndex++;
+
+        if (slideIndex >= slides.length) {
+            slideIndex = 0;
+            carouselContainer.scrollLeft = 0;
+        }
+
+        const scrollAmount = slides[slideIndex].offsetLeft - carouselContainer.scrollLeft;
+
+        carouselContainer.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth'
+        });
+
+        // Move the first slide to the end after scrolling past it
+        if (slideIndex === slides.length - 1) {
+            setTimeout(() => {
+                carouselContainer.appendChild(slides[0]);
+                slides.push(slides.shift());
+                carouselContainer.scrollLeft -= slides[0].offsetWidth;
+            }, 300); // Adjust the timeout duration if needed
+        }
+    }
+
+    let slideTimer = setInterval(nextSlide, slideInterval);
+
+    carouselContainer.addEventListener('pointerdown', () => {
+        clearInterval(slideTimer);
+    });
+
+    carouselContainer.addEventListener('pointerup', () => {
+        slideTimer = setInterval(nextSlide, slideInterval);
+    });
+});
