@@ -117,8 +117,8 @@ main {
 }
 
 .avatar {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -249,35 +249,45 @@ body.dark-mode .avatar {
     }
 }
 
+
 /* Carousel Section styles */
-/* General Styles */
 .carousel-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-bottom: 2rem;
     padding: 1rem;
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    max-width: 85%;
+    margin: 0 auto;
 }
 
 .carousel-container {
     display: flex;
-    overflow: hidden; /* Prevent scrolling with scrollbar */
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth; /* Enables smooth scrolling */
-    -webkit-overflow-scrolling: touch; /* Enables smooth scrolling on iOS */
-    position: relative; /* Needed for absolute positioning */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide scroll bar */
+    position: relative;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
 }
 
 .carousel-slide {
-    scroll-snap-align: center;
-    flex: 0 0 calc(20% - 2rem); /* Show three slides at a time with spacing */
-    margin-right: 1rem; /* Add spacing between slides */
-    overflow: hidden;
+    min-width: 33.333%;
+    transition: transform 0.5s ease;
 }
 
 .carousel-slide img {
-    width: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    height: auto;
     border-radius: 8px;
     width: 150px;
     height: 150px;
@@ -285,26 +295,38 @@ body.dark-mode .avatar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.carousel-container::after {
-    content: "";
+.carousel-button {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 2rem;
+    cursor: pointer;
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    pointer-events: none;
-    /* background: linear-gradient(to right, transparent, transparent 80%, #fff 100%); */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
 }
+
+.carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next {
+    right: 0;
+}
+
+.carousel-button:hover {
+    color: #555;
+}
+
+/* Dark mode styles omitted for brevity, but similar to your original */
+
 
 /* Dark Mode Styles */
 body.dark-mode .carousel-section {
     background-color: #444;
     box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
 }
-
-/* body.dark-mode .carousel-container::after {
-    background: linear-gradient(to right, transparent, transparent 80%, #444 100%);
-} */
 
 body.dark-mode .carousel-slide img {
     box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);

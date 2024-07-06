@@ -1,16 +1,15 @@
-// loadComponents.js
-function loadHTMLComponent(selector, url, callback) {
-    fetch(url)
-        .then(response => response.text())
-        .then(data => {
-            document.querySelector(selector).innerHTML = data;
-            if (callback) callback();
-            checkAllComponentsLoaded();  // Check if all components are loaded
-        })
-        .catch(error => console.error('Error loading component:', error));
+async function loadHTMLComponent(selector, url, callback) {
+    try {
+        const response = await fetch(url);
+        const data = await response.text();
+        document.querySelector(selector).innerHTML = data;
+        if (callback) callback();
+        checkAllComponentsLoaded();  // Check if all components are loaded
+    } catch (error) {
+        console.error('Error loading component:', error);
+    }
 }
 
-// Check if all components are loaded
 function checkAllComponentsLoaded() {
     const headerLoaded = document.querySelector('header-component').innerHTML.trim() !== '';
     const footerLoaded = document.querySelector('footer-component').innerHTML.trim() !== '';
@@ -21,77 +20,98 @@ function checkAllComponentsLoaded() {
     }
 }
 
-// Load the header and footer
-document.addEventListener('DOMContentLoaded', () => {
-    loadHTMLComponent('header-component', 'components/header.html', setDarkModeToggleListener);
-    loadHTMLComponent('footer-component', 'components/footer.html');
-});
-
-// Set the dark mode toggle event listener
 function setDarkModeToggleListener() {
     const toggleButton = document.getElementById('darkModeToggle');
     if (toggleButton) {
         toggleButton.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            // Save dark mode state to localStorage
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-            }
+            saveDarkModeState();
         });
     }
 }
 
-// Initialize dark mode based on localStorage
-function initializeDarkMode() {
-    const darkMode = localStorage.getItem('darkMode');
-    if (darkMode === 'enabled') {
-        document.body.classList.add('dark-mode');
+function saveDarkModeState() {
+    try {
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('darkMode', 'enabled');
+        } else {
+            localStorage.setItem('darkMode', 'disabled');
+        }
+    } catch (error) {
+        console.error('Error accessing localStorage:', error);
     }
 }
 
-// slider 
+function initializeDarkMode() {
+    try {
+        const darkMode = localStorage.getItem('darkMode');
+        if (darkMode === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
+    } catch (error) {
+        console.error('Error accessing localStorage:', error);
+    }
+}
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', () => {
+    loadHTMLComponent('header-component', 'components/header.html', setDarkModeToggleListener);
+    loadHTMLComponent('footer-component', 'components/footer.html');
+});
+
+// Carousel Script
+document.addEventListener('DOMContentLoaded', function() {
     const carouselContainer = document.querySelector('.carousel-container');
+    const carouselTrack = document.querySelector('.carousel-track');
     const slides = Array.from(document.querySelectorAll('.carousel-slide'));
+    const slideWidth = carouselContainer.offsetWidth / 3; // Each slide takes 1/3 of the container
 
-    let slideIndex = 0;
-    const slideInterval = 6000; // Interval between slides in milliseconds
+    let currentIndex = 0;
+
+    function setSlidePositions() {
+        slides.forEach((slide, index) => {
+            slide.style.left = `${index * slideWidth}px`;
+        });
+    }
+
+    function updateCarousel() {
+        carouselTrack.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
 
     function nextSlide() {
-        slideIndex++;
-
-        if (slideIndex >= slides.length) {
-            slideIndex = 0;
-            carouselContainer.scrollLeft = 0;
+        currentIndex++;
+        if (currentIndex >= slides.length - 4) { // Show last 3 slides
+            currentIndex = 0; // Loop back to start
         }
-
-        const scrollAmount = slides[slideIndex].offsetLeft - carouselContainer.scrollLeft;
-
-        carouselContainer.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
-
-        // Move the first slide to the end after scrolling past it
-        if (slideIndex === slides.length - 1) {
-            setTimeout(() => {
-                carouselContainer.appendChild(slides[0]);
-                slides.push(slides.shift());
-                carouselContainer.scrollLeft -= slides[0].offsetWidth;
-            }, 300); // Adjust the timeout duration if needed
-        }
+        updateCarousel();
     }
 
-    let slideTimer = setInterval(nextSlide, slideInterval);
+    function prevSlide() {
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = slides.length - 4; // Show last 3 slides
+        }
+        updateCarousel();
+    }
 
-    carouselContainer.addEventListener('pointerdown', () => {
-        clearInterval(slideTimer);
+    setSlidePositions();
+    updateCarousel();
+    
+    let slideInterval = setInterval(nextSlide, 6000);
+
+    document.querySelector('.carousel-button.next').addEventListener('click', () => {
+        clearInterval(slideInterval);
+        nextSlide();
+        slideInterval = setInterval(nextSlide, 6000);
     });
 
+    document.querySelector('.carousel-button.prev').addEventListener('click', () => {
+        clearInterval(slideInterval);
+        prevSlide();
+        slideInterval = setInterval(nextSlide, 6000);
+    });
+
+    carouselContainer.addEventListener('pointerdown', () => clearInterval(slideInterval));
     carouselContainer.addEventListener('pointerup', () => {
-        slideTimer = setInterval(nextSlide, slideInterval);
+        slideInterval = setInterval(nextSlide, 6000);
     });
 });
