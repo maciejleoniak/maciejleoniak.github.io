@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="">
+    <style>
+        @keyframes blink {
+            0% { color: red; }
+            50% { color: transparent; }
+            100% { color: red; }
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="password-section">
+            <h2>Admin Panel</h2>
+            <form id="passwordForm">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+                <button type="submit" id="submitButton">Submit</button>
+            </form>
+            <p id="message"></p>
+            <button id="homeButton" class="hidden" onclick="location.href='index.html'">Back to Home</button>
+        </section>
+    </main>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

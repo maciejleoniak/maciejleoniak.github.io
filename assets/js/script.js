@@ -1,25 +1,4 @@
-async function loadHTMLComponent(selector, url, callback) {
-    try {
-        const response = await fetch(url);
-        const data = await response.text();
-        document.querySelector(selector).innerHTML = data;
-        if (callback) callback();
-        checkAllComponentsLoaded();  // Check if all components are loaded
-    } catch (error) {
-        console.error('Error loading component:', error);
-    }
-}
-
-function checkAllComponentsLoaded() {
-    const headerLoaded = document.querySelector('header-component').innerHTML.trim() !== '';
-    const footerLoaded = document.querySelector('footer-component').innerHTML.trim() !== '';
-
-    if (headerLoaded && footerLoaded) {
-        document.body.classList.remove('loading');  // Show the content
-        initializeDarkMode();  // Initialize dark mode functionality
-    }
-}
-
+// script.js 
 function setDarkModeToggleListener() {
     const toggleButton = document.getElementById('darkModeToggle');
     if (toggleButton) {
@@ -59,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Carousel Script
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const carouselContainer = document.querySelector('.carousel-container');
     const carouselTrack = document.querySelector('.carousel-track');
     const slides = Array.from(document.querySelectorAll('.carousel-slide'));
@@ -95,23 +74,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
     setSlidePositions();
     updateCarousel();
-    
-    let slideInterval = setInterval(nextSlide, 6000);
+
+    let slideInterval = setInterval(nextSlide, 8000);
 
     document.querySelector('.carousel-button.next').addEventListener('click', () => {
         clearInterval(slideInterval);
         nextSlide();
-        slideInterval = setInterval(nextSlide, 6000);
+        slideInterval = setInterval(nextSlide, 8000);
     });
 
     document.querySelector('.carousel-button.prev').addEventListener('click', () => {
         clearInterval(slideInterval);
         prevSlide();
-        slideInterval = setInterval(nextSlide, 6000);
+        slideInterval = setInterval(nextSlide, 8000);
     });
 
     carouselContainer.addEventListener('pointerdown', () => clearInterval(slideInterval));
     carouselContainer.addEventListener('pointerup', () => {
-        slideInterval = setInterval(nextSlide, 6000);
+        slideInterval = setInterval(nextSlide, 8000);
     });
+});
+
+
+//password joke
+document.addEventListener('DOMContentLoaded', () => {
+    const passwordForm = document.getElementById('passwordForm');
+    const message = document.getElementById('message');
+    const submitButton = document.getElementById('submitButton');
+    const homeButton = document.getElementById('homeButton');
+    let attempts = 0;
+    const maxAttempts = 3;
+
+    passwordForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        attempts++;
+        if (attempts < maxAttempts) {
+            message.innerHTML = `Attempt ${attempts} of ${maxAttempts}.<br>Try again.`;
+        } else {
+            message.innerHTML = 'Last attempt failed.<br>Server will be deleted in 5 seconds.';
+            submitButton.disabled = true;  // Disable the submit button
+            startCountdown();
+        }
+    });
+
+    function startCountdown() {
+        let countdown = 5;
+        message.classList.add('blink');
+        const countdownInterval = setInterval(() => {
+            if (countdown > 0) {
+                message.innerHTML = `Last attempt failed.<br>Server will be deleted in ${countdown--} seconds.`;
+            } else {
+                clearInterval(countdownInterval);
+                message.classList.remove('blink');
+                message.innerHTML = "Just kidding! 😊";
+                homeButton.classList.remove('hidden');
+            }
+        }, 1000);
+    }
 });
