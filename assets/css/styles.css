@@ -249,100 +249,78 @@ body.dark-mode .avatar {
     }
 }
 
+/* carousel  */
+/* Keyframes */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
 
-/* Carousel Section styles */
-.carousel-section {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-    max-width: 85%;
-    margin: 0 auto;
+    100% {
+        transform: translateX(calc(-250px * 7));
+    }
 }
 
-.carousel-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Hide scroll bar */
+.slider {
+    background: white;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
+    height: 100px;
+    margin: auto;
+    overflow: hidden;
     position: relative;
     width: 100%;
 }
 
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-
-.carousel-slide {
-    min-width: 33.333%;
-    transition: transform 0.5s ease;
-}
-
-.carousel-slide img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.carousel-button {
-    background: none;
-    border: none;
-    color: #333;
-    font-size: 2rem;
-    cursor: pointer;
+.slider::before,
+.slider::after {
+    background: linear-gradient(to right,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(255, 255, 255, 0) 100%);
+    content: "";
+    height: 100px;
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
+    width: 200px;
+    z-index: 2;
 }
 
-.carousel-button.prev {
-    left: 0;
-}
-
-.carousel-button.next {
+.slider::after {
     right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
 }
 
-.carousel-button:hover {
-    color: #555;
+.slider::before {
+    left: 0;
+    top: 0;
 }
 
-/* Dark mode styles omitted for brevity, but similar to your original */
-
-
-/* Dark Mode Styles */
-body.dark-mode .carousel-section {
-    background-color: #444;
-    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+.slider .slide-track {
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: calc(250px * 14);
 }
 
-body.dark-mode .carousel-slide img {
-    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+.slider .slide {
+    height: 100px;
+    width: 250px;
 }
 
-/* admin */
-@keyframes blink {
-    0% { color: red; }
-    50% { color: transparent; }
-    100% { color: red; }
+body.dark-mode .slider {
+	display: none;
 }
 
-.blink {
-    animation: blink 1s infinite;
+#carousel-container {
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
 }
 
-.hidden {
-    display: none;
+body.dark-mode #carousel-container::before {
+	content: "Turn off dark mode to show tech carousel";
+	color: white;
+	font-size: 24px;
+	text-align: center;
 }
