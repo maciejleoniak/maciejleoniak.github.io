@@ -25,8 +25,10 @@ function loadHeadContent(url, callback) {
 function checkAllComponentsLoaded() {
     const headerLoaded = document.querySelector('header-component').innerHTML.trim() !== '';
     const footerLoaded = document.querySelector('footer-component').innerHTML.trim() !== '';
+    const carouselLoaded = document.querySelector('carousel-component').innerHTML.trim() !== '';
 
-    if (headerLoaded && footerLoaded) {
+
+    if (headerLoaded && footerLoaded && carouselLoaded) {
         document.body.classList.remove('loading');  // Show the content
         initializeDarkMode();  // Initialize dark mode functionality
     }
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadHeadContent('components/head.html', () => {
         loadHTMLComponent('header-component', 'components/header.html', setDarkModeToggleListener);
         loadHTMLComponent('footer-component', 'components/footer.html');
+        loadHTMLComponent('carousel-component', 'components/carousel.html');
     });
 });
 

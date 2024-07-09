@@ -205,11 +205,19 @@ body.dark-mode .slider {
 }
 
 /* Carousel styles */
+#carousel-container {
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 .slider {
     background: white;
     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.125);
     height: 100px;
-    margin: auto;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -235,40 +243,66 @@ body.dark-mode .slider {
     transform: rotateZ(180deg);
 }
 
-.slider .slide-track {
-    animation: scroll 40s linear infinite;
+.slide-track {
     display: flex;
-    width: calc(250px * 14);
+    animation: scroll 55s linear infinite;
 }
 
-.slider .slide {
-    height: 100px;
+/* .slide-track {
+    display: flex;
+    animation: scroll 22s linear infinite;
+} */
+
+.slide {
+    flex: 0 0 auto;
     width: 250px;
 }
 
-#carousel-container {
-    position: relative;
-    width: 100%;
+.slide.margin {
+    margin-right: 40px; 
+}
+
+.slide.margin-minus-right {
+    margin-right: -20px;
+}
+
+.slide.margin-minus-right-extra {
+    margin-right: -40px;
+}
+
+.margin-minus-right-left-extra {
+    margin-left: -40px;
+    margin-right: -40px;
+}
+
+.slide img {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    margin: 0 auto;
+    vertical-align: middle; 
 }
 
-body.dark-mode #carousel-container::before {
-    content: "Turn off dark mode to show tech carousel";
-    color: white;
-    font-size: 24px;
-    text-align: center;
+/* Class for adjusting the height of a specific image */
+.adjust-height {
+    vertical-align: sub; 
+    margin-top: 10px;
 }
 
-/* Keyframes for carousel animation */
+/* Optional: Keyframes for scrolling effect */
+/* @keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-203px * 4));
+    }
+} */
+
 @keyframes scroll {
     0% {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(calc(-250px * 7));
+        transform: translateX(calc(-250px * 10));
     }
 }
 
