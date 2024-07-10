@@ -204,6 +204,13 @@ body.dark-mode .slider {
     display: none;
 }
 
+body.dark-mode #carousel-container::before {
+    content: "Turn off dark mode to show tech carousel";
+    color: white;
+    font-size: 24px;
+    text-align: center;
+}
+
 /* Carousel styles */
 #carousel-container {
     overflow: hidden;
@@ -248,11 +255,6 @@ body.dark-mode .slider {
     animation: scroll 55s linear infinite;
 }
 
-/* .slide-track {
-    display: flex;
-    animation: scroll 22s linear infinite;
-} */
-
 .slide {
     flex: 0 0 auto;
     width: 250px;
@@ -288,14 +290,6 @@ body.dark-mode .slider {
 }
 
 /* Optional: Keyframes for scrolling effect */
-/* @keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(calc(-203px * 4));
-    }
-} */
 
 @keyframes scroll {
     0% {

@@ -23,10 +23,13 @@ function loadHeadContent(url, callback) {
 
 // Check if all components are loaded
 function checkAllComponentsLoaded() {
-    const headerLoaded = document.querySelector('header-component').innerHTML.trim() !== '';
-    const footerLoaded = document.querySelector('footer-component').innerHTML.trim() !== '';
-    const carouselLoaded = document.querySelector('carousel-component').innerHTML.trim() !== '';
-
+    const header = document.querySelector('header-component');
+    const footer = document.querySelector('footer-component');
+    const carousel = document.querySelector('carousel-component');
+    
+    const headerLoaded = header && header.innerHTML.trim() !== '';
+    const footerLoaded = footer && footer.innerHTML.trim() !== '';
+    const carouselLoaded = !carousel || (carousel && carousel.innerHTML.trim() !== '');  // Check if carousel is either not present or loaded
 
     if (headerLoaded && footerLoaded && carouselLoaded) {
         document.body.classList.remove('loading');  // Show the content
@@ -42,4 +45,3 @@ document.addEventListener('DOMContentLoaded', () => {
         loadHTMLComponent('carousel-component', 'components/carousel.html');
     });
 });
-
