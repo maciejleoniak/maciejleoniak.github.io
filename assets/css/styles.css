@@ -138,6 +138,13 @@ main {
     color: #444;
 }
 
+.contact {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #444;
+    text-align: center; /* Center align text */
+}
+
 .content-section p {
     font-size: 1rem;
     line-height: 1.5;
@@ -205,10 +212,21 @@ body.dark-mode .slider {
 }
 
 body.dark-mode #carousel-container::before {
-    content: "Turn off dark mode to show tech carousel";
+    content: "Tech carousel hidden in dark mode.";
     color: white;
     font-size: 24px;
     text-align: center;
+}
+
+body.dark-mode  a,
+body.dark-mode a {
+    color: #ccc; 
+}
+
+body.dark-mode .content-section a:hover,
+body.dark-mode .contact a:hover {
+    background-color: #555; 
+    color: #fff; 
 }
 
 /* Carousel styles */
