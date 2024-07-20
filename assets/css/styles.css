@@ -84,6 +84,7 @@ main {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    width: 80%; 
 }
 
 /* Intro Section styles */
@@ -96,6 +97,8 @@ main {
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    margin-left: auto; 
+    margin-right: auto; 
 }
 
 .intro-text {
@@ -342,5 +345,8 @@ body.dark-mode .contact a:hover {
     main {
         margin: 1rem;
         padding: 1rem;
+        width: 80%; 
+        margin-left: auto; 
+        margin-right: auto; 
     }
 }
