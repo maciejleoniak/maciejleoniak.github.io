@@ -1,1 +1,58 @@
-/* Header styles are in index.css */
+.logo a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.logo a:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3);
+}
+
+.theme-toggle {
+    font-size: 1.3rem;
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
+}
+
+.theme-toggle:hover {
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .logo a {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+    }
+}

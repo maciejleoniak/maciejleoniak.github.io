@@ -1,1 +1,112 @@
-/* Carousel styles are in index.css */
+#carousel-container {
+    overflow: visible;
+    margin: 3rem 0;
+}
+
+.slider {
+    overflow: hidden;
+    background: linear-gradient(135deg, #f8f9fa 0%, #f5f5f5 100%);
+    padding: 2rem 0;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+.slider::before,
+.slider::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.slider::before {
+    left: 0;
+    background: linear-gradient(to right, #f8f9fa, transparent);
+}
+
+.slider::after {
+    right: 0;
+    background: linear-gradient(to left, #f8f9fa, transparent);
+}
+
+.slide-track {
+    display: flex;
+    width: calc(250px * 16);
+    animation: scroll 40s linear infinite;
+}
+
+.slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+    height: 150px;
+    padding: 0 1rem;
+}
+
+.slide img {
+    max-width: 90%;
+    max-height: 100%;
+    object-fit: contain;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.slide:hover img {
+    opacity: 1;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-250px * 8));
+    }
+}
+
+/* Dark mode for carousel */
+body.dark-mode .slider {
+    background: linear-gradient(135deg, #3a3a3a 0%, #2d2d2d 100%);
+}
+
+body.dark-mode .slider::before {
+    background: linear-gradient(to right, #2d2d2d, transparent);
+}
+
+body.dark-mode .slider::after {
+    background: linear-gradient(to left, #2d2d2d, transparent);
+}
+
+body.dark-mode .slide img {
+    opacity: 0.8;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #carousel-container {
+        margin: 2rem 0;
+    }
+
+    .slider {
+        padding: 1.5rem 0;
+    }
+
+    .slide {
+        min-width: 150px;
+        height: 100px;
+    }
+
+    .slide img {
+        max-width: 85%;
+    }
+
+    .slider::before,
+    .slider::after {
+        width: 50px;
+    }
+}

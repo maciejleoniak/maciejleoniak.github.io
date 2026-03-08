@@ -1,1 +1,55 @@
-/* Footer styles are in index.css */
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    color: #8b5cf6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #7c3aed;
+    text-decoration: underline;
+}
+
+.footer-copyright p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+.footer-copyright a {
+    color: #8b5cf6;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-copyright a:hover {
+    color: #7c3aed;
+}
+
+/* Dark mode for footer */
+body.dark-mode .footer-copyright {
+    color: #d0d0d0;
+}
+
+@media (max-width: 768px) {
+    .footer-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .footer-links a {
+        font-size: 0.95rem;
+    }
+}

@@ -4,10 +4,12 @@ import Footer from './components/Footer'
 import Intro from './components/Intro'
 import TechStack from './components/TechStack'
 import Carousel from './components/Carousel'
+import Contact from './pages/Contact'
 import './App.css'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [currentPage, setCurrentPage] = useState('home')
 
   useEffect(() => {
     // Load dark mode state from localStorage
@@ -20,6 +22,19 @@ function App() {
     } catch (error) {
       console.error('Error accessing localStorage:', error)
     }
+  }, [])
+
+  useEffect(() => {
+    // Handle hash-based routing
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1) || 'home'
+      setCurrentPage(hash)
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+    handleHashChange() // Set initial page
+
+    return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
 
   const toggleDarkMode = () => {
@@ -41,9 +56,15 @@ function App() {
     <div className="app">
       <Header isDarkMode={isDarkMode} onToggleDarkMode={toggleDarkMode} />
       <main>
-        <Intro />
-        <TechStack />
-        <Carousel />
+        {currentPage === 'home' ? (
+          <>
+            <Intro />
+            <TechStack />
+            <Carousel />
+          </>
+        ) : currentPage === 'contact' ? (
+          <Contact />
+        ) : null}
       </main>
       <Footer />
     </div>
