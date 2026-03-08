@@ -2,14 +2,14 @@ import './TechStack.css'
 
 function TechStack() {
   const technologies = [
-    { name: 'JavaScript', category: 'Language' },
-    { name: 'React', category: 'Frontend' },
-    { name: 'Node.js', category: 'Backend' },
-    { name: 'Python', category: 'Language' },
-    { name: 'Jest', category: 'Testing' },
-    { name: 'Cypress', category: 'Testing' },
-    { name: 'HTML/CSS', category: 'Frontend' },
-    { name: 'Git', category: 'Tools' },
+    { name: 'HTML/CSS' },
+    { name: 'JavaScript' },
+    { name: 'Python' },
+    { name: 'Git' },
+    { name: 'Cypress' },
+    { name: 'Selenium' },
+    { name: 'Playwright' },
+    { name: 'AI' },
   ]
 
   return (
@@ -22,7 +22,6 @@ function TechStack() {
         {technologies.map((tech, index) => (
           <div key={index} className="tech-card">
             <div className="tech-name">{tech.name}</div>
-            <div className="tech-category">{tech.category}</div>
           </div>
         ))}
       </div>
